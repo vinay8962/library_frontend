@@ -1,45 +1,41 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import Image from "../../assets/6920933-removebg-preview.png";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginRequest } from "../../redux/reducers/Login";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { loading, role } = useSelector((state) => state.login);
 
-  const handleSubmit = async (e) => {
+  // Handle login form submission
+  const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(loginRequest({ email, password }));
+  };
 
-    try {
-      const response = await axios.post("http://localhost:8000/users/login", {
-        email,
-        password,
-      });
-
-      console.log("Login Successful", response.data);
-
-      if (response.data.data.role === 102) {
+  // ✅ FIX: Run this only when `role` changes (not on every render)
+  useEffect(() => {
+    if (role) {
+      if (role === 101) {
+        toast.success("Welcome Admin!");
+        // navigate("/admin-dashboard"); // Redirect to admin page
+      } else if (role === 102) {
+        toast.success("Welcome Library Admin!");
         navigate("/");
-        alert("library admin login");
+      } else if (role === 103) {
+        toast.success("Welcome Student!");
+        // navigate("/student-dashboard");
       } else {
-        navigate("/");
-        alert("other login");
-      }
-
-      toast.success("Login Successful!");
-    } catch (error) {
-      if (error.response) {
-        console.error("Login Failed", error.response.data);
-
-        toast.error(error.response.data.message || "Invalid email or password");
-      } else {
-        console.error("Error connecting to the API:", error.message);
-        toast.error("Something went wrong. Please try again later.");
+        toast.error("Invalid role!");
       }
     }
-  };
+  }, [role, navigate]); // Runs only when `role` changes
 
   return (
     <div className="min-h-screen bg-cream flex flex-col">
@@ -50,7 +46,7 @@ const Login = () => {
         <h3 className="text-lg text-textColor">
           Don't have an account?
           <button
-            className="ml-2 bg-Button text-white px-3 w-32 h-11 py-1 rounded-lg  transition"
+            className="ml-2 bg-Button text-white px-3 w-32 h-11 py-1 rounded-lg transition"
             onClick={() => navigate("/register")}
           >
             Sign Up
@@ -59,15 +55,13 @@ const Login = () => {
       </div>
 
       <div className="flex flex-col md:flex-row flex-grow items-center justify-center p-6">
-        {/* Left Side (Image) */}
         <div className="hidden md:flex md:w-1/2 items-center justify-center">
           <img src={Image} alt="Login" className="w-4/5 max-w-md" />
         </div>
 
-        {/* Right Side (Form) */}
         <div className="flex w-full md:w-1/2 items-center justify-center">
           <form
-            className=" p-8 rounded-lg shadow-lg w-full max-w-md"
+            className="p-8 rounded-lg shadow-lg w-full max-w-md"
             onSubmit={handleSubmit}
           >
             <h2 className="text-3xl font-bold text-center text-gray-700 mb-6">
@@ -80,7 +74,7 @@ const Login = () => {
               </label>
               <input
                 type="email"
-                className="w-full p-3   rounded-lg focus:outline-textColor"
+                className="w-full p-3 rounded-lg focus:outline-textColor"
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -94,7 +88,7 @@ const Login = () => {
               </label>
               <input
                 type="password"
-                className="w-full p-3   rounded-lg focus:border-textColor "
+                className="w-full p-3 rounded-lg focus:border-textColor"
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -104,9 +98,10 @@ const Login = () => {
 
             <button
               type="submit"
-              className="w-full bg-Button text-white p-3 rounded-lg  transition duration-300"
+              className="w-full bg-Button text-white p-3 rounded-lg transition duration-300"
+              disabled={loading}
             >
-              Log In
+              {loading ? "Logging in..." : "Log In"}
             </button>
           </form>
         </div>

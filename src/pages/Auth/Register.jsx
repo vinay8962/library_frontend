@@ -1,11 +1,13 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Image from "../../assets/6920933-removebg-preview.png";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRolesRequest } from "../../redux/reducers/Role";
+import { registerUserRequest } from "../../redux/reducers/Register";
 
 const Register = () => {
-  const [roles, setRoles] = useState([]);
+  // const [roles, setRoles] = useState([]);
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,19 +15,15 @@ const Register = () => {
   const [mobile, setMobile] = useState("");
   const [address, setAddress] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { roles } = useSelector((state) => state.roles);
+
+  console.log(roles);
 
   useEffect(() => {
-    const fetchRoles = async () => {
-      try {
-        const response = await axios.get("http://localhost:8000/role");
-        setRoles(response.data.data || []);
-      } catch (error) {
-        console.error("Error fetching role data:", error);
-        setRoles([]);
-      }
-    };
-    fetchRoles();
-  }, []);
+    dispatch(fetchRolesRequest());
+  }, [dispatch]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,20 +36,9 @@ const Register = () => {
       address,
     };
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/users",
-        userData
-      );
-      console.log("User registered successfully:", response.data);
-
-      toast.success("Registration successful!");
-      navigate("/login");
-    } catch (error) {
-      console.error("Error registering user:", error);
-
-      toast.error("Failed to register. Please try again.");
-    }
+    dispatch(registerUserRequest(userData));
+    toast.success("Registration successful!");
+    navigate("/login");
   };
 
   return (
