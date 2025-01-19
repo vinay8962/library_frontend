@@ -6,9 +6,12 @@ import { ToastContainer } from "react-toastify";
 import store from "./redux/store";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
-import Dashboard from "./pages/Dashboard/Index";
+import Dashboard from "./pages/Dashboard/Index"; // Make sure Dashboard contains <Outlet />
 import CreateLibrary from "./pages/Library Admin/CreateLibrary";
 import LibraryBooking from "./pages/Students/LibraryBooking";
+import Home from "./pages/Home";
+import Students from "./pages/Private/Students";
+import LibraryAdmin from "./pages/Private/LibraryAdmin";
 
 const App = () => {
   return (
@@ -20,10 +23,15 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* Dashboard as a Layout Wrapper */}
+          {/* Nested Routes under Dashboard */}
           <Route path="/" element={<Dashboard />}>
-            <Route path="createlibrary" element={<CreateLibrary />} />
-            <Route path="bookinglibrary" element={<LibraryBooking />} />
+            <Route index element={<Home />} /> {/* Default child route */}
+            <Route element={<LibraryAdmin />}>
+              <Route path="createlibrary" element={<CreateLibrary />} />
+            </Route>
+            <Route element={<Students />}>
+              <Route path="bookinglibrary" element={<LibraryBooking />} />
+            </Route>
           </Route>
         </Routes>
       </Router>

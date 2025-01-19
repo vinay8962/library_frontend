@@ -14,9 +14,9 @@ function* handleLogin(action) {
       `${process.env.REACT_APP_API_URL}/users/login`,
       action.payload
     );
-    const { role, token } = response.data.data;
-
-    yield put(loginSuccess({ role, token }));
+    const { role, token, userId } = response.data.data;
+    console.log(response.data.data);
+    yield put(loginSuccess({ role, token, userId }));
     toast.success("Login successful!");
   } catch (error) {
     const errorMessage = error.response?.data?.message || "Login failed!";

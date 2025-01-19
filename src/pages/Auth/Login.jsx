@@ -27,10 +27,9 @@ const Login = () => {
         // navigate("/admin-dashboard"); // Redirect to admin page
       } else if (role === 102) {
         toast.success("Welcome Library Admin!");
-        navigate("/");
+        navigate("/", { replace: true });
       } else if (role === 103) {
         toast.success("Welcome Student!");
-        // navigate("/student-dashboard");
       } else {
         toast.error("Invalid role!");
       }

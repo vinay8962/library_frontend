@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   role: null,
   token: null,
+  userId: null,
   loading: false,
   error: null,
 };
@@ -19,6 +20,7 @@ const loginSlice = createSlice({
       state.loading = false;
       state.role = action.payload.role;
       state.token = action.payload.token;
+      state.userId = action.payload.userId;
     },
     loginFailure: (state, action) => {
       state.loading = false;
