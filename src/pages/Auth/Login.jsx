@@ -29,6 +29,7 @@ const Login = () => {
         toast.success("Welcome Library Admin!");
         navigate("/", { replace: true });
       } else if (role === 103) {
+        navigate("/student-home", { replace: true });
         toast.success("Welcome Student!");
       } else {
         toast.error("Invalid role!");
@@ -53,14 +54,14 @@ const Login = () => {
         </h3>
       </div>
 
-      <div className="flex flex-col md:flex-row flex-grow items-center justify-center p-6">
+      <div className=" flex flex-col md:flex-row flex-grow items-center justify-center p-6">
         <div className="hidden md:flex md:w-1/2 items-center justify-center">
           <img src={Image} alt="Login" className="w-4/5 max-w-md" />
         </div>
 
-        <div className="flex w-full md:w-1/2 items-center justify-center">
+        <div className=" flex w-full md:w-1/2 items-center justify-center">
           <form
-            className="p-8 rounded-lg shadow-lg w-full max-w-md"
+            className="p-8 bg-thirdPrimary rounded-lg shadow-lg shadow-gray-500 w-full max-w-md"
             onSubmit={handleSubmit}
           >
             <h2 className="text-3xl font-bold text-center text-gray-700 mb-6">

@@ -9,9 +9,7 @@ import axios from "axios";
 function* handleLibrary(action) {
   try {
     const { token, userId } = action.payload;
-    console.log(action);
 
-    console.log(token);
     // Replace with the correct API URL
     const response = yield call(() =>
       axios.get(`${process.env.REACT_APP_API_URL}/library/${userId}`, {
@@ -21,8 +19,8 @@ function* handleLibrary(action) {
         },
       })
     );
-    console.log(response.data.data);
     // Dispatch success action with data
+    console.log(response.data.data);
     yield put(getLibrarySuccess(response.data.data));
   } catch (err) {
     // Dispatch failure action with error

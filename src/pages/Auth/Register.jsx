@@ -7,7 +7,6 @@ import { fetchRolesRequest } from "../../redux/reducers/Role";
 import { registerUserRequest } from "../../redux/reducers/Register";
 
 const Register = () => {
-  // const [roles, setRoles] = useState([]);
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +18,7 @@ const Register = () => {
 
   const { roles } = useSelector((state) => state.roles);
 
-  console.log(roles);
+  // console.log(roles);
 
   useEffect(() => {
     dispatch(fetchRolesRequest());
@@ -38,7 +37,6 @@ const Register = () => {
 
     dispatch(registerUserRequest(userData));
     toast.success("Registration successful!");
-    navigate("/login");
   };
 
   return (
@@ -65,9 +63,9 @@ const Register = () => {
         </div>
 
         {/* Right Side (Form) */}
-        <div className="flex w-full md:w-1/2 items-center justify-center">
+        <div className="flex w-full  md:w-1/2 items-center justify-center">
           <form
-            className=" p-8 rounded-lg shadow-lg w-full max-w-md"
+            className=" p-8 rounded-lg bg-thirdPrimary shadow-gray-500 shadow-lg w-full max-w-md"
             onSubmit={handleSubmit}
           >
             <h2 className="text-3xl font-bold text-center text-gray-700 mb-6">

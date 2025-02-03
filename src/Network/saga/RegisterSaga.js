@@ -8,12 +8,17 @@ import {
 
 function* handleRegister(action) {
   try {
-    yield call(() =>
-      axios.post(`${process.env.REACT_APP_API_URL}/register`(action.payload))
+    console.log("API Request:", action.payload);
+    const response = yield call(() =>
+      axios.post(`${process.env.REACT_APP_API_URL}/users`, action.payload)
     );
+    console.log("API Response:", response.data);
     yield put(registerUserSuccess());
   } catch (error) {
-    yield put(registerUserFailure(error.message));
+    console.error("API Error:", error);
+    yield put(
+      registerUserFailure(error?.response?.data?.message || error.message)
+    );
   }
 }
 

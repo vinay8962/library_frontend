@@ -15,7 +15,7 @@ function* handleLogin(action) {
       action.payload
     );
     const { role, token, userId } = response.data.data;
-    console.log(response.data.data);
+    // console.log(response.data.data);
     yield put(loginSuccess({ role, token, userId }));
     toast.success("Login successful!");
   } catch (error) {
