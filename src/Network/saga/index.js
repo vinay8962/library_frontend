@@ -10,6 +10,7 @@ import libraryPlanSaga from "./LibraryPlan";
 import libraryUserSaga from "./LibraryUser";
 import getSeatSaga from "./GetSeat";
 import seatBookingSaga from "./SeatBooking";
+import getUserSaga from "./GetUser";
 export default function* rootSaga() {
   yield all([
     roleSaga(),
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     libraryUserSaga(),
     getSeatSaga(),
     seatBookingSaga(),
+    getUserSaga(),
   ]);
 }

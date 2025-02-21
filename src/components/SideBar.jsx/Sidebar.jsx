@@ -48,66 +48,96 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         <ul className="space-y-2">
           {role === 102 ? (
             <>
-              <Link to="/">
-                <li className="flex items-center p-2 hover:bg-secondPrimary hover:text-thirdPrimary rounded cursor-pointer">
+              <li>
+                <Link
+                  to="/"
+                  className="flex items-center p-2 hover:bg-secondPrimary hover:text-thirdPrimary rounded cursor-pointer"
+                >
                   <FaHome size={"25px"} className={`${isOpen ? "mr-2" : ""}`} />
                   {isOpen && "Home"}
-                </li>
-              </Link>
-              <Link to="/seats">
-                <li className="flex items-center p-2 hover:bg-secondPrimary hover:text-thirdPrimary rounded cursor-pointer">
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/seats"
+                  className="flex items-center p-2 hover:bg-secondPrimary hover:text-thirdPrimary rounded cursor-pointer"
+                >
                   <FaChair
                     size={"25px"}
                     className={`${isOpen ? "mr-2" : ""}`}
                   />
                   {isOpen && "Seats"}
-                </li>
-              </Link>
-              <Link to="/createStudents">
-                <li className="flex items-center p-2 hover:bg-secondPrimary hover:text-thirdPrimary rounded cursor-pointer">
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/createStudents"
+                  className="flex items-center p-2 hover:bg-secondPrimary hover:text-thirdPrimary rounded cursor-pointer"
+                >
                   <FaUserPlus
                     size={"25px"}
                     className={`${isOpen ? "mr-2" : ""}`}
                   />
                   {isOpen && "Create Students"}
-                </li>
-              </Link>
-              <li className="flex items-center p-2 hover:bg-secondPrimary hover:text-thirdPrimary rounded cursor-pointer">
-                <FaBookOpen
-                  size={"25px"}
-                  className={`${isOpen ? "mr-2" : ""}`}
-                />
-                {isOpen && "Students"}
+                </Link>
               </li>
-              <Link to="/createlibrary">
-                <li className="flex items-center p-2 hover:bg-secondPrimary hover:text-thirdPrimary rounded cursor-pointer">
+              <li>
+                <Link
+                  to="/students"
+                  className="flex items-center p-2 hover:bg-secondPrimary hover:text-thirdPrimary rounded cursor-pointer"
+                >
+                  <FaBookOpen
+                    size={"25px"}
+                    className={`${isOpen ? "mr-2" : ""}`}
+                  />
+                  {isOpen && "Students"}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/createlibrary"
+                  className="flex items-center p-2 hover:bg-secondPrimary hover:text-thirdPrimary rounded cursor-pointer"
+                >
                   <MdLibraryAdd
                     size={"25px"}
                     className={`${isOpen ? "mr-2" : ""}`}
                   />
                   {isOpen && "Add Library"}
-                </li>
-              </Link>
+                </Link>
+              </li>
             </>
           ) : role === 103 ? (
-            <Link to="/bookinglibrary">
-              <li className="flex items-center p-2 hover:bg-secondPrimary hover:text-thirdPrimary rounded cursor-pointer">
+            <li>
+              <Link
+                to="/bookinglibrary"
+                className="flex items-center p-2 hover:bg-secondPrimary hover:text-thirdPrimary rounded cursor-pointer"
+              >
                 <FaBookOpen
                   size={"25px"}
                   className={`${isOpen ? "mr-2" : ""}`}
                 />
                 {isOpen && "Booking Library"}
-              </li>
-            </Link>
+              </Link>
+            </li>
           ) : (
-            <li className="flex items-center p-2 hover:bg-secondPrimary hover:text-thirdPrimary rounded cursor-pointer">
-              <FaHome size={"25px"} className={`${isOpen ? "mr-2" : ""}`} />
-              {isOpen && "Home"}
+            <li>
+              <Link
+                to="/"
+                className="flex items-center p-2 hover:bg-secondPrimary hover:text-thirdPrimary rounded cursor-pointer"
+              >
+                <FaHome size={"25px"} className={`${isOpen ? "mr-2" : ""}`} />
+                {isOpen && "Home"}
+              </Link>
             </li>
           )}
-          <li className="flex items-center p-2 hover:bg-secondPrimary hover:text-thirdPrimary rounded cursor-pointer">
-            <FaCogs size={"25px"} className={`${isOpen ? "mr-2" : ""}`} />
-            {isOpen && "Settings"}
+          <li>
+            <Link
+              to="/settings"
+              className="flex items-center p-2 hover:bg-secondPrimary hover:text-thirdPrimary rounded cursor-pointer"
+            >
+              <FaCogs size={"25px"} className={`${isOpen ? "mr-2" : ""}`} />
+              {isOpen && "Settings"}
+            </Link>
           </li>
         </ul>
       </motion.div>

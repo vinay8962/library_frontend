@@ -17,7 +17,7 @@ const Register = () => {
   const dispatch = useDispatch();
 
   const { roles } = useSelector((state) => state.roles);
-
+  console.log(roles);
   // console.log(roles);
 
   useEffect(() => {

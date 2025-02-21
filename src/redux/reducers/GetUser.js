@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  user: [],
+  user: null, // Changed from array to null (single user expected)
   loading: false,
   error: null,
 };
+
 const getUser = createSlice({
   name: "getUser",
   initialState,
